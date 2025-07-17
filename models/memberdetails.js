@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const memberSchema = new mongoose.Schema({
     sno: {
@@ -18,6 +19,9 @@ const memberSchema = new mongoose.Schema({
         null:true
     }
 })
+
+memberSchema.plugin(AutoIncrement, { inc_field: 'sno' });
+
 
 const Member = mongoose.model('member',memberSchema)
 
