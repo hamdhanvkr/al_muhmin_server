@@ -4,6 +4,7 @@ const cors = require('cors');
 const connectDB = require('./config/database');
 const Login = require('./models/login');
 const Member = require('./models/memberdetails')
+const User = require('./models/users')
 
 dotenv.config();
 const app = express();
@@ -23,11 +24,17 @@ connectDB();
 
 const Logins = require('./routes/login');
 const MemberDetails = require('./routes/memberdetails');
+const UserDetails = require('./routes/users')
+const AmountEntry = require("./routes/amountentry");
 
 // Routes API
 
 app.use('/api', Logins)
 app.use('/api', MemberDetails)
+app.use('/api',UserDetails)
+app.use('/api/amountentry',AmountEntry)
+app.use('/uploads', express.static('uploads'));
+
 
 
 

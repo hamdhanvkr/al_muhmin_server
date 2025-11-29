@@ -4,7 +4,6 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const memberSchema = new mongoose.Schema({
     sno: {
         type: Number,
-        required: true
     },
     name:{
         type:String,
