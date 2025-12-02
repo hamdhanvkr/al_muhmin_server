@@ -1,7 +1,7 @@
 const express = require('express');
 const route = express.Router();
-const Users = require('../models/users');
-const bcrypt = require("bcrypt")
+const Login = require('../models/login');
+// const bcrypt = require("bcrypt") // REMOVED: bcrypt is no longer used
 
 route.post('/login', async (req, res) => {
 
@@ -9,23 +9,28 @@ route.post('/login', async (req, res) => {
     // console.log(req.body)
 
     try {
-        const login = await Users.findOne({ username });
+        const login = await Login.findOne({ username });
 
         if (!login) {
-            return res.json({ success: false, message: "Username is Invalid" })
+            return res.json({ success: false, message: "Username is Invalid" });
         }
-        const hashPasswordCheck = await bcrypt.compare(password,login.password)
-        if(!hashPasswordCheck){
-            return res.json({success:false,message:"Password is Invalid"})
+        
+        // --- MODIFICATION: Plain text password comparison ---
+        // Assuming login.password now contains the plain text password from the database
+        if (password !== login.password) {
+            return res.json({ success: false, message: "Password is Invalid" });
         }
+        // ---------------------------------------------------
 
         else {
-            return res.json({ success: true, message: "Login Success" })
+            return res.json({ success: true, message: "Login Success" });
         }
     }
     catch (error) {
-        console.error(err)
+        // Changed 'err' to 'error' to match catch parameter
+        console.error(error); 
+        return res.status(500).json({ success: false, message: "Internal Server Error" });
     }
-})
+});
 
 module.exports = route;
