@@ -6,6 +6,7 @@ const Login = require('./models/login');
 const Member = require('./models/memberdetails')
 const User = require('./models/users')
 
+
 dotenv.config();
 const app = express();
 
@@ -26,13 +27,17 @@ const Logins = require('./routes/login');
 const MemberDetails = require('./routes/memberdetails');
 const UserDetails = require('./routes/users')
 const AmountEntry = require("./routes/amountentry");
-
+const AcademicRoutes = require('./routes/academic');
 // Routes API
 
 app.use('/api', Logins)
 app.use('/api', MemberDetails)
 app.use('/api',UserDetails)
 app.use('/api/amountentry',AmountEntry)
+app.use("/api/academic",AcademicRoutes)
+app.use("/api/users", Logins);
+
+
 app.use('/uploads', express.static('uploads'));
 
 

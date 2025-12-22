@@ -11,7 +11,7 @@ const amountEntrySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-    year: {
+  year: {
     type: Number,
     required: true,
   },
@@ -28,6 +28,8 @@ const amountEntrySchema = new mongoose.Schema({
   nov: { type: Number, default: 0 },
   dec: { type: Number, default: 0 },
   total: { type: Number, default: 0 },
+  academic_year: { type: String, required: true },
+
 }, { timestamps: true });
 
 const AmountEntry = mongoose.model("amountentry", amountEntrySchema);

@@ -16,6 +16,14 @@ const memberSchema = new mongoose.Schema({
     email:{
         type:String,
         null:true
+    },
+    chapter:{
+        type:String,
+        required:true
+    },
+    academic_year:{
+        type:Number,
+        required:false
     }
 })
 
